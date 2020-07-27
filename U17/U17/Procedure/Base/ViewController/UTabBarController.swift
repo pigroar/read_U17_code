@@ -15,7 +15,7 @@ class UTabBarController: UITabBarController {
         
         tabBar.isTranslucent = false
         
-        /// 首页
+        /// 首页---Home
         let onePageVC = UHomeViewController(titles: ["推荐",
                                                      "VIP",
                                                      "订阅",
@@ -31,7 +31,7 @@ class UTabBarController: UITabBarController {
                                selectedImage: UIImage(named: "tab_home_S"))
         
         
-        /// 分类
+        /// 分类---Cate
         let classVC = UCateListViewController()
         addChildViewController(classVC,
                                title: "分类",
@@ -39,7 +39,7 @@ class UTabBarController: UITabBarController {
                                selectedImage: UIImage(named: "tab_class_S"))
         
         
-        /// 书架
+        /// 书架---Book
         let bookVC = UBookViewController(titles: ["收藏",
                                                   "书单",
                                                   "下载"],
@@ -53,13 +53,14 @@ class UTabBarController: UITabBarController {
                                selectedImage: UIImage(named: "tab_book_S"))
         
         
-        /// 我的
+        /// 我的---Mine
         let mineVC = UMineViewController()
         addChildViewController(mineVC,
                                title: "我的",
                                image: UIImage(named: "tab_mine"),
                                selectedImage: UIImage(named: "tab_mine_S"))
     }
+    
     
     func addChildViewController(_ childController: UIViewController, title:String?, image:UIImage? ,selectedImage:UIImage?) {
         
@@ -69,15 +70,20 @@ class UTabBarController: UITabBarController {
                                                   selectedImage: selectedImage?.withRenderingMode(.alwaysOriginal))
         
         if UIDevice.current.userInterfaceIdiom == .phone {
+            // (⊙_⊙)? 图像btn的位置和大小调整
             childController.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         }
+        // navi <- childController
         addChild(UNavigationController(rootViewController: childController))
     }
     
 }
 
+
 extension UTabBarController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        // selectedViewController代表当前选中的子控制器
+        // .lightContent-状态栏高亮
         guard let select = selectedViewController else { return .lightContent }
         return select.preferredStatusBarStyle
     }

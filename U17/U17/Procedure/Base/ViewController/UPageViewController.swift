@@ -25,6 +25,7 @@ class UPageViewController: UBaseViewController {
         }
     }()
     
+    // UIPageViewController - 各View间滑动切换
     lazy var pageVC: UIPageViewController = {
         return UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
     }()
@@ -33,7 +34,15 @@ class UPageViewController: UBaseViewController {
     private(set) var titles:[String]!
     private var currentSelectIndex: Int = 0
     
-    
+    /*
+     convenience:便利，使用convenience修饰的构造函数叫做便利构造函数
+     便利构造函数通常用在对系统的类进行构造函数的扩充时使用。
+     便利构造函数的特点：
+     1、便利构造函数通常都是写在extension里面
+     2、便利函数init前面需要加载convenience
+     3、在便利构造函数中需要明确的调用self.init()
+      
+     */ 
     convenience init(titles: [String] = [], vcs: [UIViewController] = [], pageStyle: UPageStyle = .none) {
         self.init()
         self.titles = titles
@@ -48,7 +57,7 @@ class UPageViewController: UBaseViewController {
     @objc func changeIndex(segment: UISegmentedControl) {
         let index = segment.selectedSegmentIndex
         if currentSelectIndex != index {
-            let target:[UIViewController] = [vcs[index]]
+            let target:[UIViewController] = [vcs[index]] // ???
             let direction:UIPageViewController.NavigationDirection = currentSelectIndex > index ? .reverse : .forward
             pageVC.setViewControllers(target, direction: direction, animated: false) { [weak self] (finish) in
                 self?.currentSelectIndex = index

@@ -18,6 +18,7 @@ class UBaseViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.background
+        // ios 11 以上， 全平台和操作系统
         if #available(iOS 11.0, *) {
             UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
         } else {
@@ -34,6 +35,7 @@ class UBaseViewController: UIViewController {
     
     func configUI() {}
     
+    // 左侧添加一个返回按键，返回页面
     func configNavigationBar() {
         guard let navi = navigationController else { return }
         if navi.visibleViewController == self {

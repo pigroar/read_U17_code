@@ -15,10 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
+    // 判断网络可达性
     lazy var reachability: NetworkReachabilityManager? = {
         return NetworkReachabilityManager(host: "http://app.u17.com")
     }()
     
+    // 初始化竖屏（旋转方向的的设定）
     var orientation: UIInterfaceOrientationMask = .portrait
     
 
@@ -40,10 +42,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func configBase() {
         //MARK: 键盘处理
         IQKeyboardManager.shared.enable = true
+        // 点击空白处键盘隐藏
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         
         //MARK: 性别缓存
         let defaults = UserDefaults.standard
+        // extension of String -> sexTypeKey
         if defaults.value(forKey: String.sexTypeKey) == nil {
             defaults.set(1, forKey: String.sexTypeKey)
             defaults.synchronize()
